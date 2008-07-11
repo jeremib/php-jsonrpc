@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<script src="json_client.js" type="text/javascript"></script>
+		<script src="prototype.js" type="text/javascript"></script>
+		
+		<script type="text/javascript">
+			function add(){
+				var jsonClient = new JsonRpcClient();
+				var x = prompt('First Number');
+				var y = prompt('Second Number');
+				jsonClient.doCall('../server/jsonrpc.php', 'Math.add', [x, y], function(t){
+					var resp = t.responseText.evalJSON();
+					if (resp.error == null) {
+						alert(resp.result);
+					}
+					else {
+						alert(resp.error);
+					}
+				});
+			}
+
+			
+		</script>
+	</head>
+	<body>
+		<h1>Add two numbers together via PHP class</h1>
+		<input type="button" onclick="javascript:add();" value="Add">
+	</body>
+</html>
